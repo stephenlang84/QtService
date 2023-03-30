@@ -1,10 +1,9 @@
 #include "controlhelper.h"
-#include <QAndroidIntent>
-#include <QtAndroid>
+#include <QtCore/private/qandroidextras_p.h>
 
 Q_DECLARE_METATYPE(QAndroidIntent)
 Q_DECLARE_METATYPE(QAndroidServiceConnection*)
-Q_DECLARE_METATYPE(QtAndroid::BindFlags)
+Q_DECLARE_METATYPE(QtAndroidPrivate::BindFlags)
 
 ControlHelper::ControlHelper(QtService::ServiceControl *parent) :
 	QObject(parent),
@@ -24,7 +23,7 @@ void ControlHelper::bind()
 	_connection = new Connection();
 	_control->callCommand("bind",
 						  static_cast<QAndroidServiceConnection*>(_connection),
-						  QtAndroid::BindFlags{QtAndroid::BindFlag::AutoCreate});
+                          QtAndroidPrivate::BindFlags{QtAndroidPrivate::BindFlag::AutoCreate});
 }
 
 void ControlHelper::unbind()
@@ -48,11 +47,11 @@ void ControlHelper::Connection::onServiceDisconnected(const QString &name)
 
 void ControlHelper::Connection::toast(const QString &message)
 {
-	QtAndroid::runOnAndroidThread([message](){
-		auto toast = QAndroidJniObject::callStaticObjectMethod("android/widget/Toast",
+    QNativeInterface::QAndroidApplication::runOnAndroidMainThread([message](){
+        auto toast = QJniObject::callStaticObjectMethod("android/widget/Toast",
 															   "makeText", "(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;",
-															   QtAndroid::androidContext().object(),
-															   QAndroidJniObject::fromString(message).object(),
+                                                               QtAndroidPrivate::context(),
+                                                               QJniObject::fromString(message).object(),
 															   1);
 		toast.callMethod<void>("show");
 	});

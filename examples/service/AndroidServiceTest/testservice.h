@@ -2,8 +2,7 @@
 #define TESTSERVICE_H
 
 #include <QtService/Service>
-#include <QAndroidIntent>
-#include <QAndroidBinder>
+#include <QtCore/private/qandroidextras_p.h>
 
 class TestService : public QtService::Service
 {

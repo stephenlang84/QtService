@@ -4,11 +4,7 @@
 #include <QtCore/QLoggingCategory>
 
 #include <QtService/ServiceControl>
-
-#include <QtAndroidExtras/QAndroidJniObject>
-#include <QtAndroidExtras/QAndroidIntent>
-#include <QtAndroidExtras/QAndroidServiceConnection>
-#include <QtAndroidExtras/QtAndroid>
+#include <QtCore/private/qandroidextras_p.h>
 
 class AndroidServiceControl : public QtService::ServiceControl
 {
@@ -34,10 +30,10 @@ protected:
 
 private:
 	QByteArray jniServiceId() const;
-	QAndroidJniObject serviceComponent() const;
-	QAndroidJniObject serviceInfo() const;
+    QJniObject serviceComponent() const;
+    QJniObject serviceInfo() const;
 
-	bool bind(QAndroidServiceConnection *serviceConnection, QtAndroid::BindFlags flags);
+    bool bind(QAndroidServiceConnection *serviceConnection, QtAndroidPrivate::BindFlags flags);
 	void unbind(QAndroidServiceConnection *serviceConnection);
 	void startWithIntent(const QAndroidIntent &intent);
 };

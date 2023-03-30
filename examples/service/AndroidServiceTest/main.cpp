@@ -1,8 +1,7 @@
 #include <QGuiApplication>
 #include <QtQml>
 #include <QtService/ServiceControl>
-#include <QAndroidJniObject>
-#include <QtAndroid>
+#include <QJniObject>
 #include "testservice.h"
 #include "controlhelper.h"
 
@@ -19,12 +18,12 @@ int activityMain(int argc, char *argv[])
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	QGuiApplication app(argc, argv);
 
-	QAndroidJniObject::callStaticMethod<void>("de/skycoder42/qtservice/test/TestServiceHelper",
+    QJniObject::callStaticMethod<void>("de/skycoder42/qtservice/test/TestServiceHelper",
 											  "registerChannel", "(Landroid/content/Context;)V",
-											  QtAndroid::androidContext().object());
+                                              QtAndroidPrivate::context());
 
 	QQmlApplicationEngine engine;
-	auto control = QtService::ServiceControl::create(QStringLiteral("android"), QStringLiteral("de.skycoder42.qtservice.AndroidService"), &engine);
+    auto control = QtService::ServiceControl::create(QStringLiteral("android"), QStringLiteral("de/skycoder42/qtservice/AndroidService"), &engine);
 	auto helper = new ControlHelper{control};
 	engine.rootContext()->setContextProperty(QStringLiteral("control"), control);
 	engine.rootContext()->setContextProperty(QStringLiteral("helper"), helper);

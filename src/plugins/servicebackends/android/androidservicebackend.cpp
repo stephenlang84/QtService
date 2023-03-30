@@ -2,9 +2,8 @@
 #include "androidserviceplugin.h"
 #include <QtCore/QPointer>
 #include <QtCore/QDebug>
-#include <QtAndroidExtras/QAndroidService>
-#include <QtAndroidExtras/QtAndroid>
-#include <QtAndroidExtras/QAndroidJniExceptionCleaner>
+
+#include <QtCore/private/qandroidextras_p.h>
 using namespace QtService;
 
 Q_LOGGING_CATEGORY(logBackend, "qt.service.plugin.android.backend")
@@ -27,8 +26,8 @@ int AndroidServiceBackend::runService(int &argc, char **argv, int flags)
 
 	//NOTE check if onStartCommand is supported with QAndroidService yet
 	qCDebug(logBackend) << "registering service JNI natives";
-	_javaService = QtAndroid::androidService();
-	QAndroidJniEnvironment env;
+    _javaService = QtAndroidPrivate::service();
+    QJniEnvironment env;
 	static const JNINativeMethod methods[] = {
 		{"callStartCommand", "(Landroid/content/Intent;III)I", reinterpret_cast<void*>(&AndroidServiceBackend::callStartCommand)},
 		{"exitService", "()Z", reinterpret_cast<void*>(&AndroidServiceBackend::exitService)}
@@ -51,7 +50,8 @@ int AndroidServiceBackend::runService(int &argc, char **argv, int flags)
 
 void AndroidServiceBackend::quitService()
 {
-	QAndroidJniExceptionCleaner cleaner {QAndroidJniExceptionCleaner::OutputMode::Verbose};
+    QJniEnvironment env;
+    env.checkAndClearExceptions();
 	_javaService.callMethod<void>("stopSelf");
 }
 

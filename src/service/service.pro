@@ -1,7 +1,6 @@
 TARGET = QtService
 
 QT = core network core-private
-android: QT += androidextras
 
 HEADERS += \
 	qtservice_global.h \

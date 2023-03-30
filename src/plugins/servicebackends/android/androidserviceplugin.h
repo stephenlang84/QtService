@@ -3,10 +3,7 @@
 
 #include <QtService/ServicePlugin>
 
-#include <QtAndroidExtras/QAndroidIntent>
-#include <QtAndroidExtras/QAndroidBinder>
-#include <QtAndroidExtras/QAndroidServiceConnection>
-#include <QtAndroidExtras/QtAndroid>
+#include <QtCore/private/qandroidextras_p.h>
 
 class AndroidServicePlugin : public QObject, public QtService::ServicePlugin
 {
@@ -25,6 +22,7 @@ public:
 Q_DECLARE_METATYPE(QAndroidBinder*)
 Q_DECLARE_METATYPE(QAndroidIntent)
 Q_DECLARE_METATYPE(QAndroidServiceConnection*)
-Q_DECLARE_METATYPE(QtAndroid::BindFlags)
+
+Q_DECLARE_METATYPE(QtAndroidPrivate::BindFlags)
 
 #endif // ANDROIDSERVICEPLUGIN_H

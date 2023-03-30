@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += quick service androidextras
+QT += quick service core-private
 CONFIG += c++14
 
 HEADERS += \
