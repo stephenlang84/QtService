@@ -4,7 +4,7 @@ import java.util.concurrent.Semaphore;
 
 import android.content.Intent;
 
-import org.qtproject.qt5.android.bindings.QtService;
+import org.qtproject.qt.android.bindings.QtService;
 
 public class AndroidService extends QtService {
 	private final Semaphore _startSem = new Semaphore(0);

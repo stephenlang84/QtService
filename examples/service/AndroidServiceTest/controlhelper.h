@@ -2,7 +2,7 @@
 #define CONTROLHELPER_H
 
 #include <QtService/ServiceControl>
-#include <QAndroidServiceConnection>
+#include <QtCore/private/qandroidextras_p.h>
 
 class ControlHelper : public QObject
 {

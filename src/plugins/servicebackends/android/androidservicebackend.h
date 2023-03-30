@@ -4,10 +4,7 @@
 #include <QtCore/QLoggingCategory>
 
 #include <QtService/ServiceBackend>
-
-#include <QtAndroidExtras/QAndroidJniObject>
-#include <QtAndroidExtras/QAndroidBinder>
-#include <QtAndroidExtras/QAndroidIntent>
+#include <QtCore/private/qandroidextras_p.h>
 
 class AndroidServiceBackend : public QtService::ServiceBackend
 {
@@ -24,14 +21,16 @@ public:
 	static jint JNICALL callStartCommand(JNIEnv *env, jobject object, jobject intent, jint flags, jint startId, jint oldId);
 	static jboolean JNICALL exitService(JNIEnv *env, jobject object);
 
+protected Q_SLOTS:
+    void onStopped(int exitCode) override;
+
 private Q_SLOTS:
 	void onStarted(bool success);
 	void onExit();
-	void onStopped(int exitCode);
 
 private:
 	static QPointer<AndroidServiceBackend> _backendInstance;
-	QAndroidJniObject _javaService;
+    QJniObject _javaService;
 	bool _startupFailed = false;
 
 	QAndroidBinder* onBind(const QAndroidIntent &intent);
