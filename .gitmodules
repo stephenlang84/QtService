@@ -1,0 +1,6 @@
+[submodule "libs/QCtrlSignals"]
+	path = libs/QCtrlSignals
+	url = https://github.com/stephenlang84/QCtrlSignals
+[submodule "libs/QConsole"]
+	path = libs/QConsole
+	url = https://github.com/stephenlang84/QConsole.git

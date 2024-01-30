@@ -77,3 +77,10 @@ vendor
 qpmx.user.json
 qtservice_win.pro
 *.json.user
+
+# vscode
+.vscode/*
+
+# build dir
+build/*
+

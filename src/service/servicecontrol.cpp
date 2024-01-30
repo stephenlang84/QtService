@@ -244,7 +244,7 @@ void ServiceControl::setError(QString error) const
 		return;
 
 	d->error = std::move(error);
-	emit const_cast<ServiceControl*>(this)->errorChanged(d->error, {});
+	emit const_cast<ServiceControl*>(this)->errorChanged(d->error, QPrivateSignal());
 }
 
 // ------------- Private Implementation -------------

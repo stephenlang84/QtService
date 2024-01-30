@@ -7,7 +7,7 @@
 #include <QtCore/qvariant.h>
 #include <QtCore/qhash.h>
 
-#include "QtService/qtservice_global.h"
+#include <QtService/qtservice_global.h>
 
 namespace QtService {
 

@@ -11,8 +11,8 @@
 #include <QtCore/qhash.h>
 #include <QtCore/qvariant.h>
 
-#include "QtService/qtservice_global.h"
-#include "QtService/qtservice_helpertypes.h"
+#include <QtService/qtservice_global.h>
+#include <QtService/qtservice_helpertypes.h>
 
 //! The primary namespace of the QtService library
 namespace QtService {

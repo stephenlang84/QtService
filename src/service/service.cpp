@@ -178,7 +178,7 @@ void Service::setTerminalActive(bool terminalActive)
 		d->startTerminals();
 	else
 		d->stopTerminals();
-	emit terminalActiveChanged(d->terminalActive, {});
+	emit terminalActiveChanged(d->terminalActive, QPrivateSignal());
 }
 
 void Service::setTerminalMode(Service::TerminalMode terminalMode)
@@ -187,7 +187,7 @@ void Service::setTerminalMode(Service::TerminalMode terminalMode)
 		return;
 
 	d->terminalMode = terminalMode;
-	emit terminalModeChanged(d->terminalMode, {});
+	emit terminalModeChanged(d->terminalMode, QPrivateSignal());
 }
 
 void Service::setGlobalTerminal(bool globalTerminal)
@@ -198,7 +198,7 @@ void Service::setGlobalTerminal(bool globalTerminal)
 	if(d->termServer && d->termServer->isRunning())
 		qCWarning(logSvc) << "Chaning the globalTerminal property will not have any effect until you disable and reenable the terminal server";
 	d->terminalGlobal = globalTerminal;
-	emit globalTerminalChanged(d->terminalGlobal, {});
+	emit globalTerminalChanged(d->terminalGlobal, QPrivateSignal());
 }
 
 void Service::setStartWithTerminal(bool startWithTerminal)
@@ -207,7 +207,7 @@ void Service::setStartWithTerminal(bool startWithTerminal)
 		return;
 
 	d->startWithTerminal = startWithTerminal;
-	emit startWithTerminalChanged(d->startWithTerminal, {});
+	emit startWithTerminalChanged(d->startWithTerminal, QPrivateSignal());
 }
 
 void Service::terminalConnected(Terminal *terminal)
