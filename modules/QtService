@@ -1,0 +1,10 @@
+#ifndef QT_QTSERVICE_MODULE_H
+#define QT_QTSERVICE_MODULE_H
+#include <QtService/QtServiceDepends>
+#include "service.h"
+#include "servicebackend.h"
+#include "servicecontrol.h"
+#include "serviceplugin.h"
+#include "terminal.h"
+#include "qtserviceversion.h"
+#endif
